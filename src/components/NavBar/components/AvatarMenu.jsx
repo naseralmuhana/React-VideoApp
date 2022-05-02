@@ -5,13 +5,17 @@ import {
   IconButton,
   ListItemIcon,
   Menu,
-  MenuItem
+  MenuItem,
 } from "@mui/material"
 import React from "react"
+import { useNavigate } from "react-router-dom"
+import useNavAction from "../../../hooks/use-nav-action"
 import { useAuth } from "../../../store/auth/auth-context"
 
 const AvatarMenu = () => {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const { action: logoutHandler } = useNavAction(logout, "/login")
+
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -20,6 +24,7 @@ const AvatarMenu = () => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
   return (
     <>
       <IconButton
@@ -72,9 +77,10 @@ const AvatarMenu = () => {
         <MenuItem>
           <Avatar /> My account
         </MenuItem>
+
         <Divider />
 
-        <MenuItem>
+        <MenuItem onClick={logoutHandler}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

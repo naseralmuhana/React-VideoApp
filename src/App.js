@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
-import { Home, Login } from "./containers"
-import { NotProtectedRoutes, ProtectedRoutes } from "./utilities/PrivateRoutes"
+import { Create, Home, Login, Profile } from "./containers"
+import { Layout, NotProtectedRoutes, ProtectedRoutes } from "./utilities"
 
 const App = () => {
   return (
@@ -9,7 +9,11 @@ const App = () => {
         <Route path="login" element={<Login />} />
       </Route>
       <Route element={<ProtectedRoutes />}>
-        <Route path="/*" element={<Home />} />
+        <Route element={<Layout />}>
+          <Route path="/*" element={<Home />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Route>
     </Routes>
   )

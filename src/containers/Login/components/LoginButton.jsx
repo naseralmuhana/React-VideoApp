@@ -2,18 +2,13 @@ import { Button } from "@mui/material"
 import React from "react"
 import { FcGoogle } from "react-icons/fc"
 import { useNavigate } from "react-router-dom"
+import useNavAction from "../../../hooks/use-nav-action"
 import { useAuth } from "../../../store/auth/auth-context"
 
 const LoginButton = () => {
-  const navigate = useNavigate()
   const { login } = useAuth()
-  
-  // Login Handler
-  const loginHandler = async () => {
-    await login()
-    // navigate to the home page after login done
-    navigate("/", { replace: true })
-  }
+  const { action: loginHandler } = useNavAction(login, "/")
+
   return (
     <Button
       onClick={loginHandler}

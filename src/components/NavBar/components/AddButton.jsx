@@ -6,7 +6,7 @@ import { useColorMode } from "../../../store/theme/colorMode-context"
 const AddButton = () => {
   const { mode } = useColorMode()
   return (
-    <Link to="/login">
+    <Link to="create">
       <IconButton
         sx={{
           backgroundColor: mode === "light" ? "#121212" : "#d1d1d1",
