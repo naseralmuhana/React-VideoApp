@@ -5,11 +5,10 @@ import {
   IconButton,
   ListItemIcon,
   Menu,
-  MenuItem,
-  Tooltip,
+  MenuItem
 } from "@mui/material"
 import React from "react"
-import { useAuth } from "../../../../store/auth-context"
+import { useAuth } from "../../../store/auth/auth-context"
 
 const AvatarMenu = () => {
   const { user } = useAuth()

@@ -7,6 +7,7 @@ const Search = () => {
       label="Search"
       sx={{
         width: "60vw",
+        color: "text.primary",
       }}
       InputProps={{
         endAdornment: (

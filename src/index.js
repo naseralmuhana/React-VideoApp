@@ -1,19 +1,18 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import "./index.css"
-import App from "./App"
 import { BrowserRouter } from "react-router-dom"
-import { ThemeProvider } from "@mui/material"
-import { theme } from "./theme"
-import { AuthProvider } from "./store/auth-context"
+import App from "./App"
+import "./index.css"
+import { AuthProvider } from "./store/auth/auth-context"
+import { ColorModeProvider } from "./store/theme/colorMode-context"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <AuthProvider>
-    <ThemeProvider theme={theme}>
+    <ColorModeProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ThemeProvider>
+    </ColorModeProvider>
   </AuthProvider>
 )

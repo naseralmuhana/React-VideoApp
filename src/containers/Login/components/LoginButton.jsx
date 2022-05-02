@@ -2,7 +2,7 @@ import { Button } from "@mui/material"
 import React from "react"
 import { FcGoogle } from "react-icons/fc"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../../../store/auth-context"
+import { useAuth } from "../../../store/auth/auth-context"
 
 const LoginButton = () => {
   const navigate = useNavigate()

@@ -1,16 +1,21 @@
-import { Stack } from "@mui/material"
+import { Paper, Stack } from "@mui/material"
 import React from "react"
 import { AddButton, AvatarMenu, Logo, Search, ThemeButton } from "./components"
 
 const NavBar = () => {
   return (
-    <Stack
-      width="100vw"
-      alignItems="center"
-      justifyContent="space-between"
-      p={2}
-      direction="row"
-      gap={2.5}
+    <Paper
+      elevation={2}
+      sx={{
+        display: "flex",
+        gap: "1.5rem",
+        padding: "1rem",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "100vw",
+        borderTopRightRadius: 0,
+        borderTopLeftRadius: 0,
+      }}
     >
       <Logo />
       <Search />
@@ -24,7 +29,7 @@ const NavBar = () => {
         <AddButton />
         <AvatarMenu />
       </Stack>
-    </Stack>
+    </Paper>
   )
 }
 

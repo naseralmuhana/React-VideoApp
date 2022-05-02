@@ -1,7 +1,7 @@
 import { signInWithPopup } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
 import React, { useContext, useState } from "react"
-import { auth, db, provider } from "../firebase-config"
+import { auth, db, provider } from "../../firebase-config"
 import { retrieveStoredUserData, savetoLocalStorage } from "./auth-helper"
 
 const AuthContext = React.createContext({
