@@ -1,9 +1,13 @@
-import React from "react"
+import { Typography, Box } from "@mui/material"
 
 const Home = () => {
-  console.log('HOME');
+  console.log("HOME")
 
-  return <h1>Home</h1>
+  return (
+    <Box>
+      <Typography variant="h4">Home</Typography>
+    </Box>
+  )
 }
 
 export default Home

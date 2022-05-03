@@ -1,4 +1,4 @@
-import { AppBar, Container, Paper, Stack } from "@mui/material"
+import { AppBar, Stack } from "@mui/material"
 import React from "react"
 import { AddButton, AvatarMenu, Logo, Search, ThemeButton } from "./components"
 
@@ -7,12 +7,13 @@ const NavBar = () => {
     <AppBar
       sx={{
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "space-between",
         alignItems: "center",
         gap: "1.5rem",
         padding: "1rem",
         width: "100%",
         bgcolor: "background.default",
+        position: "sticky",
       }}
     >
       <Logo />
