@@ -1,7 +1,13 @@
 export const themeObj = {
   dark: {
-    // background: { default: "#1A202C" },
     text: { primary: "#d1d1d1" },
+    otherColor: {
+      borderColor: "#616161",
+    },
   },
-  light: {},
+  light: {
+    otherColor: {
+      borderColor: "#9e9e9e",
+    },
+  },
 }

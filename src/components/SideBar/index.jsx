@@ -15,12 +15,14 @@ const SideBar = () => {
   return (
     <Stack
       component={"ul"}
-      width="5rem"
       sx={{
         flexDirection: "column",
         justifyContent: "start",
         alignItems: "center",
         padding: 0,
+        width: "4rem",
+        // position: "fixed",
+        // top: 102,
       }}
     >
       {categories.map((category) => (
