@@ -1,5 +1,5 @@
 //prettier-ignore
-import { Button, FormLabel, TextField } from "@mui/material"
+import {  FormLabel, TextField } from "@mui/material"
 //prettier-ignore
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { useRef, useState } from "react"
@@ -11,8 +11,6 @@ import useAlert from "../../hooks/use-alert"
 import { CategoryField, LocationField, UploadPlaceHolder } from "./components"
 //prettier-ignore
 import { CatLocContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
-import ReactQuill from "react-quill"
-import "react-quill/dist/quill.snow.css" // ES6
 
 const Create = () => {
   console.log("CREATE")
