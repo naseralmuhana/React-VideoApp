@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom"
 import NavBar from "../components/NavBar"
 import SideBar from "../components/SideBar"
 
-const CustomBox = styled("main")(({ theme }) => ({
+const Main = styled("main")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   color: theme.palette.text.primary,
   width: "100%",
@@ -13,22 +13,24 @@ const CustomBox = styled("main")(({ theme }) => ({
   display: "flex",
 }))
 
+const MainContent = styled(Stack)({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+})
+
 const Layout = () => {
   return (
     <>
       <NavBar />
 
-      <CustomBox>
+      <Main>
         <SideBar />
-        <Stack
-          component={"section"}
-          justifyContent="center"
-          alignItems="center"
-          sx={{ width: "100%" }}
-        >
+        <MainContent component="section">
           <Outlet />
-        </Stack>
-      </CustomBox>
+        </MainContent>
+      </Main>
     </>
   )
 }
