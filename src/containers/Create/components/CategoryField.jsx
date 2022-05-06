@@ -14,6 +14,7 @@ const CategoryField = ({ value, onChange }) => {
         value={value}
         label="Category"
         onChange={(e) => onChange(e.target.value)}
+        required
       >
         {categories.map((category) => (
           <MenuItem

@@ -4,9 +4,11 @@ const Home = () => {
   console.log("HOME")
 
   return (
-    <Box>
-      <Typography variant="h4">Home</Typography>
-    </Box>
+    <>
+      <Box>
+        <Typography variant="h4">Home</Typography>
+      </Box>
+    </>
   )
 }
 

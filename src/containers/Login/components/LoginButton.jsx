@@ -1,7 +1,6 @@
 import { Button } from "@mui/material"
 import React from "react"
 import { FcGoogle } from "react-icons/fc"
-import { useNavigate } from "react-router-dom"
 import useNavAction from "../../../hooks/use-nav-action"
 import { useAuth } from "../../../store/auth/auth-context"
 

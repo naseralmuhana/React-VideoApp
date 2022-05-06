@@ -1,36 +1,60 @@
 //prettier-ignore
-import {  FormLabel, TextField } from "@mui/material"
+import { FormLabel, TextField } from "@mui/material"
 //prettier-ignore
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { useRef, useState } from "react"
 import { IoTrash } from "react-icons/io5"
 import AlertMsg from "../../components/AlertMsg"
 import Spinner from "../../components/Spinner"
-import { storage } from "../../firebase-config"
+import { db, storage } from "../../firebase-config"
 import useAlert from "../../hooks/use-alert"
-import { CategoryField, LocationField, UploadPlaceHolder } from "./components"
+//prettier-ignore
+import { CategoryField, LocationField, RichTextEditor, SubmitButton, UploadPlaceHolder } from "./components"
 //prettier-ignore
 import { CatLocContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
+import { useAuth } from "../../store/auth/auth-context"
+import { doc, setDoc } from "firebase/firestore"
+import { useNavigate } from "react-router-dom"
 
 const Create = () => {
-  console.log("CREATE")
+  const { user } = useAuth()
+  const navigate = useNavigate()
   const { requestAlert, alert, status, msg } = useAlert()
   const title = useRef("")
   const location = useRef("")
-  const inputFile = useRef(null)
+
   const [category, setCategory] = useState("")
 
   const [videoAsset, setVideoAsset] = useState(null)
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState(1)
 
-  const submitHandler = (e) => {
+  const editor = useRef(null)
+
+  const submitHandler = async (e) => {
     e.preventDefault()
-    const enteredTitle = title.current.value
-    const enteredLocation = location.current.value
-    console.log("Title =>", enteredTitle)
-    console.log("Category =>", category)
-    console.log("Location =>", enteredLocation)
+    setLoading(true)
+    try {
+      if (!videoAsset) {
+        requestAlert("error", "Required Video Field are missing!")
+      } else {
+        const data = {
+          id: `${Date.now()}`,
+          title: title.current.value,
+          userId: user?.uid,
+          category: category,
+          location: location.current.value,
+          videoUrl: videoAsset,
+          description: editor.current.value,
+        }
+        await setDoc(doc(db, "videos", `${Date.now()}`), data)
+        navigate("/", { replace: true })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const uploadFileHandler = (e) => {
@@ -86,7 +110,6 @@ const Create = () => {
 
   const input = (
     <input
-      ref={inputFile}
       type="file"
       name="upload-file"
       onChange={uploadFileHandler}
@@ -96,46 +119,46 @@ const Create = () => {
   )
 
   return (
-    <Container onSubmit={submitHandler}>
-      {alert && <AlertMsg status={status} msg={msg} />}
-      {/* TitleField */}
-      <TextField inputRef={title} label="Title" required fullWidth />
-      {/* categorySelect , locationField container */}
-      <CatLocContainer>
-        <CategoryField value={category} onChange={setCategory} />
-        <LocationField ref={location} />
-      </CatLocContainer>
-      {/* upload videoField container */}
-      <UploadContainer>
-        {!videoAsset ? (
-          <FormLabel sx={{ width: "100%", flex: 1 }}>
-            <InnerUploadContainer>
-              {loading ? (
-                <Spinner msg={"Uploading Your Video"} progress={progress} />
-              ) : (
-                <>
-                  <UploadPlaceHolder />
-                  {input}
-                </>
-              )}
-            </InnerUploadContainer>
-          </FormLabel>
-        ) : (
-          <VideoPlayerContainer>
-            <DeleteIconButton onClick={deleteVideoHandler}>
-              <IoTrash fontSize={20} />
-            </DeleteIconButton>
-            <VideoPlayer src={videoAsset} controls />
-          </VideoPlayerContainer>
-        )}
-      </UploadContainer>
-      {/* Text Editor */}
-      {/* <ReactQuill /> */}
-
-      {/* <Button type="submit" variant="outlined">
-        Add
-      </Button> */}
-    </Container>
+    <>
+      <Container onSubmit={submitHandler}>
+        {alert && <AlertMsg status={status} msg={msg} />}
+        {/* TitleField */}
+        <TextField inputRef={title} label="Title" required fullWidth />
+        {/* categorySelect , locationField container */}
+        <CatLocContainer>
+          <CategoryField value={category} onChange={setCategory} />
+          <LocationField ref={location} />
+        </CatLocContainer>
+        {/* upload videoField container */}
+        <UploadContainer>
+          {!videoAsset ? (
+            <FormLabel sx={{ width: "100%", flex: 1 }}>
+              <InnerUploadContainer>
+                {loading ? (
+                  <Spinner msg={"Uploading Your Video"} progress={progress} />
+                ) : (
+                  <>
+                    <UploadPlaceHolder />
+                    {input}
+                  </>
+                )}
+              </InnerUploadContainer>
+            </FormLabel>
+          ) : (
+            <VideoPlayerContainer>
+              <DeleteIconButton onClick={deleteVideoHandler}>
+                <IoTrash fontSize={20} />
+              </DeleteIconButton>
+              <VideoPlayer src={videoAsset} controls />
+            </VideoPlayerContainer>
+          )}
+        </UploadContainer>
+        {/* Text Editor */}
+        <RichTextEditor ref={editor} />
+        {/* Submit Button */}
+        <SubmitButton loading={loading} />
+      </Container>
+    </>
   )
 }
 

@@ -36,6 +36,7 @@ export const UploadContainer = styled(Stack)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   borderColor: theme.palette.otherColor.borderColor,
+  marginBottom: "0.5rem",
 }))
 
 export const InnerUploadContainer = styled(Stack)(({ theme }) => ({
