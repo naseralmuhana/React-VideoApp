@@ -12,7 +12,7 @@ const SubmitButton = ({ loading }) => {
       variant={`${loading ? "outlined" : "contained"}`}
       sx={{
         marginTop: "0.5rem",
-        width: "80%",
+        width: "40%",
       }}
     >
       Upload
