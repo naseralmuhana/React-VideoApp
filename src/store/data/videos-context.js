@@ -1,19 +1,22 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useCallback, useContext, useState } from "react"
 
-import { fetchVideos } from "../../api/fetch-videos"
+import { fetchVideos } from "../../lib/api"
 
-const VideoContext = React.createContext({ videos: [] })
+const VideoContext = React.createContext({
+  videos: [],
+  fetchAllVideos: () => {},
+})
 
 export const VideoProvider = ({ children }) => {
   const [videos, setVideos] = useState([])
 
-  useEffect(() => {
+  const fetchAllVideos = useCallback(() => {
     fetchVideos()
       .then((data) => setVideos(data))
       .catch((error) => console.log(error))
   }, [])
 
-  const contextValue = { videos }
+  const contextValue = { videos, fetchAllVideos }
   return (
     <VideoContext.Provider value={contextValue}>
       {children}
