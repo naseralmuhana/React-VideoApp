@@ -5,7 +5,8 @@ import useHttp from "../../hooks/use-http"
 import { getInfo } from "../../lib/api"
 
 import Grid from "@mui/material/Grid"
-import { CustomBreadcrumbs, Description, Player } from "./components"
+// prettier-ignore
+import { CustomBreadcrumbs, Description, Player, VideoDetails } from "./components"
 import { styled } from "@mui/material/styles"
 import Stack from "@mui/material/Stack"
 
@@ -22,10 +23,11 @@ const Details = () => {
   return (
     <Container>
       <CustomBreadcrumbs title={data?.title} />
-      <Grid container>
+      <Grid container columns={13} gap="0.5rem">
         {/* Player */}
         <Player url={data?.videoUrl} />
-        <Grid item xs={4}></Grid>
+        {/* video details (user who upload the video , publish date, download button) */}
+        <VideoDetails userId={data?.userId} id={data?.id} />
       </Grid>
       {/* Description */}
       {data?.description && <Description desc={data?.description} />}
@@ -38,7 +40,7 @@ export default Details
 const Container = styled(Stack)({
   flexDirection: "column",
   alignItems: "center",
-  justifyContent: "center",
+  // justifyContent: "center",
   width: "100%",
   height: "100%",
   padding: "1rem 1.5rem",

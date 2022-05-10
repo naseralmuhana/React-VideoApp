@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
     // set the accessToken and user info
     setToken(refreshToken)
-    setUser(user)
+    setUser(providerData[0])
 
     // store user info inside Firestore
     await setDoc(doc(db, "users", providerData[0].uid), providerData[0])

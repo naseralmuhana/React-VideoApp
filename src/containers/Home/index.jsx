@@ -7,7 +7,6 @@ import { useVideos } from "../../store/data/videos-context"
 import VideoCard from "./components/VideoCard"
 
 const Home = () => {
-  console.log("Home")
   const { videos, fetchAllVideos } = useVideos()
 
   useEffect(() => {
