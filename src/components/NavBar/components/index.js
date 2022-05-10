@@ -1,4 +1,3 @@
-export { default as Logo } from "./Logo"
 export { default as Search } from "./Search"
 export { default as ThemeButton } from "./ThemeButton"
 export { default as AddButton } from "./AddButton"

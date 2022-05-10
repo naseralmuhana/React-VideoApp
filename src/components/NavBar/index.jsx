@@ -1,6 +1,7 @@
 import { AppBar, Stack } from "@mui/material"
 import React from "react"
-import { AddButton, AvatarMenu, Logo, Search, ThemeButton } from "./components"
+import { Logo } from "../UI"
+import { AddButton, AvatarMenu, Search, ThemeButton } from "./components"
 
 const NavBar = () => {
   return (

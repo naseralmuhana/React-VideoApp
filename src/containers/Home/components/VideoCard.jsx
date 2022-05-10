@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid"
 import {CardMedia, Card, CardContent, Typography, Avatar, CardActions} from "@mui/material"
 import styled from "@emotion/styled"
 import { Link } from "react-router-dom"
-import { getUserInfo } from "../../../lib/api"
+import { getInfo } from "../../../lib/api"
 import moment from "moment"
 
 const Item = styled(Grid)(({ theme }) => ({
@@ -42,7 +42,7 @@ const VideoCard = ({ data }) => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    getUserInfo(userId)
+    getInfo({ document: "users", id: userId })
       .then((user) => setUser(user))
       .catch((error) => console.log(error))
   }, [userId])
@@ -69,7 +69,7 @@ const VideoCard = ({ data }) => {
         </CustomCardContent>
         <CardActions sx={{ justifyContent: "flex-end", paddingRight: "16px" }}>
           <Typography color="text.secondary" fontSize="12px">
-            {moment(new Date(parseInt(id)).toISOString()).fromNow()}
+            {moment(new Date(parseInt(id)).toISOString()).calendar()}
           </Typography>
         </CardActions>
       </Card>

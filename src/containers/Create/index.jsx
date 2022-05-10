@@ -1,20 +1,19 @@
 //prettier-ignore
 import { FormLabel, TextField } from "@mui/material"
+import { doc, setDoc } from "firebase/firestore"
 //prettier-ignore
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { useRef, useState } from "react"
 import { IoTrash } from "react-icons/io5"
-import AlertMsg from "../../components/AlertMsg"
-import Spinner from "../../components/Spinner"
+import { useNavigate } from "react-router-dom"
+import { AlertMsg, Spinner } from "../../components/UI"
 import { db, storage } from "../../firebase-config"
 import useAlert from "../../hooks/use-alert"
+import { useAuth } from "../../store/auth/auth-context"
 //prettier-ignore
 import { CategoryField, LocationField, RichTextEditor, SubmitButton, UploadPlaceHolder } from "./components"
 //prettier-ignore
 import { CatLocContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
-import { useAuth } from "../../store/auth/auth-context"
-import { doc, setDoc } from "firebase/firestore"
-import { useNavigate } from "react-router-dom"
 
 const Create = () => {
   const { user } = useAuth()

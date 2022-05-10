@@ -1,11 +1,5 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  orderBy,
-  query,
-} from "firebase/firestore"
+// prettier-ignore
+import { collection, doc, getDoc, getDocs, orderBy, query, } from "firebase/firestore"
 import { db } from "../firebase-config"
 
 // Fetch all videos from the database
@@ -17,14 +11,14 @@ export const fetchVideos = async () => {
   return querySnapshot.docs.map((doc) => doc.data())
 }
 
-// fetch the user info
-export const getUserInfo = async (userId) => {
-  const userRef = doc(db, "users", userId)
-  const userSnap = await getDoc(userRef)
+// fetch the something info from database
+export const getInfo = async ({ document, id }) => {
+  const docRef = doc(db, document, id)
+  const docSnap = await getDoc(docRef)
 
-  if (userSnap.exists()) {
-    return userSnap.data()
+  if (docSnap.exists()) {
+    return docSnap.data()
   } else {
-    return "No such document!"
+    return null
   }
 }
