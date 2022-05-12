@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid"
 import {CardMedia, Card, CardContent, Typography, Avatar, CardActions} from "@mui/material"
 import styled from "@emotion/styled"
 import { Link } from "react-router-dom"
-import { getInfo } from "../../../lib/api"
+import { getInfo } from "../lib/api"
 import moment from "moment"
 
 const Item = styled(Grid)(({ theme }) => ({

@@ -1,5 +1,5 @@
 // prettier-ignore
-import { collection, doc, getDoc, getDocs, orderBy, query, } from "firebase/firestore"
+import { collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, } from "firebase/firestore"
 import { db } from "../firebase-config"
 
 // Fetch all videos from the database
@@ -21,4 +21,9 @@ export const getInfo = async ({ document, id }) => {
   } else {
     return null
   }
+}
+
+// Delete Document
+export const deleteInfo = async ({ document = "videos", id }) => {
+  await deleteDoc(doc(db, document, id))
 }

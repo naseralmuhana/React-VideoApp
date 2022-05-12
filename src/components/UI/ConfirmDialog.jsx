@@ -5,7 +5,14 @@ import DialogActions from "@mui/material/DialogActions"
 import DialogContent from "@mui/material/DialogContent"
 import DialogTitle from "@mui/material/DialogTitle"
 
-const ConfirmDialog = ({ title, children, open, setOpen, onConfirm }) => {
+const ConfirmDialog = (props) => {
+  const {
+    title = "Confirmation",
+    children = "Are you sure you want to delete this Video?",
+    open,
+    setOpen,
+    onConfirm,
+  } = props
   return (
     <Dialog
       open={open}
@@ -15,11 +22,7 @@ const ConfirmDialog = ({ title, children, open, setOpen, onConfirm }) => {
       <DialogTitle id="confirm-dialog">{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>
       <DialogActions>
-        <Button
-          variant="contained"
-          onClick={() => setOpen(false)}
-          color="secondary"
-        >
+        <Button variant="contained" onClick={() => setOpen(false)}>
           No
         </Button>
         <Button
@@ -28,7 +31,7 @@ const ConfirmDialog = ({ title, children, open, setOpen, onConfirm }) => {
             setOpen(false)
             onConfirm()
           }}
-          color="default"
+          sx={{ backgroundColor: "error.main" }}
         >
           Yes
         </Button>

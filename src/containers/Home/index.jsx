@@ -2,9 +2,8 @@ import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import { useEffect } from "react"
 import { Spinner } from "../../components/UI"
-
+import VideoCard from "../../components/VideoCard"
 import { useVideos } from "../../store/data/videos-context"
-import VideoCard from "./components/VideoCard"
 
 const Home = () => {
   const { videos, fetchAllVideos } = useVideos()

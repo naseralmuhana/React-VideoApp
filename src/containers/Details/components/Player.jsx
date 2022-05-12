@@ -73,7 +73,7 @@ const Player = ({ url }) => {
 
   return (
     //md={8}
-    <Grid item xs={12} md={8.55} position="relative" ref={playerContainer}>
+    <Grid item xs={13} md={9.55} position="relative" ref={playerContainer}>
       {/* Video player */}
       <ReactPlayer
         ref={playerRef}
