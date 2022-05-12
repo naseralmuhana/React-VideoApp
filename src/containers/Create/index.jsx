@@ -19,16 +19,14 @@ const Create = () => {
   const { user } = useAuth()
   const navigate = useNavigate()
   const { requestAlert, alert, status, msg } = useAlert()
-  const title = useRef("")
-  const location = useRef("")
+  const [category, setCategory] = useState(""),
+    [videoAsset, setVideoAsset] = useState(null),
+    [loading, setLoading] = useState(false),
+    [progress, setProgress] = useState(1)
 
-  const [category, setCategory] = useState("")
-
-  const [videoAsset, setVideoAsset] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [progress, setProgress] = useState(1)
-
-  const editor = useRef(null)
+  const title = useRef(""),
+    location = useRef(""),
+    editor = useRef(null)
 
   const submitHandler = async (e) => {
     e.preventDefault()
