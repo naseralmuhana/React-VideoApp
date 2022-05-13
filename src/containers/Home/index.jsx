@@ -1,33 +1,25 @@
-import Box from "@mui/material/Box"
-import Grid from "@mui/material/Grid"
 import { useEffect } from "react"
-import { Spinner } from "../../components/UI"
-import VideoCard from "../../components/VideoCard"
-import { useVideos } from "../../store/data/videos-context"
+import { useParams } from "react-router-dom"
+import { Spinner, NotFound } from "../../components/UI"
+import VideosGrid from "../../components/VideosGrid"
+import useHttp from "../../hooks/use-http"
+import { getAllVideos, getCategoryVideos } from "../../lib/api"
 
 const Home = () => {
-  const { videos, fetchAllVideos } = useVideos()
-
+  const { sendRequest, status, data } = useHttp(true)
+  const { categoryId } = useParams()
   useEffect(() => {
-    fetchAllVideos()
-  }, [fetchAllVideos])
+    if (categoryId) {
+      sendRequest(getCategoryVideos, { categoryId })
+    } else {
+      sendRequest(getAllVideos)
+    }
+  }, [sendRequest, categoryId])
 
-  if (videos.length === 0) return <Spinner />
+  if (status === "pending") return <Spinner />
+  if (data?.length === 0) return <NotFound />
 
-  return (
-    <Box sx={{ flex: "1", width: "100%", padding: "1.5rem 2.5rem" }}>
-      <Grid
-        container
-        columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}
-        component="ul"
-        sx={{ listStyleType: "none", margin: 0 }}
-      >
-        {videos.map((video) => (
-          <VideoCard key={video.id} data={video} />
-        ))}
-      </Grid>
-    </Box>
-  )
+  return data.length > 0 && <VideosGrid videos={data} />
 }
 
 export default Home

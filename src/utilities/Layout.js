@@ -4,22 +4,6 @@ import { Outlet } from "react-router-dom"
 import NavBar from "../components/NavBar"
 import SideBar from "../components/SideBar"
 
-const Main = styled("main")(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  color: theme.palette.text.primary,
-  width: "100%",
-  minHeight: "calc(100vh - 103px)",
-  overflowX: "hidden",
-  display: "flex",
-}))
-
-const MainContent = styled(Stack)({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
-})
-
 const Layout = () => {
   return (
     <>
@@ -36,3 +20,19 @@ const Layout = () => {
 }
 
 export default Layout
+
+const Main = styled("main")(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
+  width: "100%",
+  minHeight: "calc(100vh - 103px)",
+  overflowX: "hidden",
+  display: "flex",
+}))
+
+const MainContent = styled(Stack)({
+  display: "flex",
+  // justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+})

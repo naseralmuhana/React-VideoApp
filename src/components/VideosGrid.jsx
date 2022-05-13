@@ -1,17 +1,20 @@
 import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
-import VideoCard from "../../../components/VideoCard"
+import VideoCard from "./VideoCard"
 
-const RecommendedVideos = ({ videos }) => {
+const VideosGrid = ({ videos, title }) => {
   return (
     <Stack my="0.5rem" direction="column" alignSelf="baseline">
-      <Typography mb="1rem" variant="h5" component="h2">
-        Recommended Videos
-      </Typography>
+      {title && (
+        <Typography mb="1rem" variant="h5" component="h2">
+          {title}
+        </Typography>
+      )}
+
       <Grid
         container
-        columns={{ xs: 4, sm: 8, md: 12 }}
+        columns={{ xs: 4, sm: 8, md: 12, lg: 12 }}
         component="ul"
         sx={{ listStyleType: "none", margin: 0, padding: 0 }}
       >
@@ -23,4 +26,4 @@ const RecommendedVideos = ({ videos }) => {
   )
 }
 
-export default RecommendedVideos
+export default VideosGrid

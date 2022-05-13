@@ -1,59 +1,67 @@
 import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import { styled } from "@mui/material/styles"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { Spinner } from "../../components/UI"
+import { CustomBreadcrumbs, Spinner } from "../../components/UI"
+import VideosGrid from "../../components/VideosGrid"
 import useHttp from "../../hooks/use-http"
-import { getInfo } from "../../lib/api"
-import { useVideos } from "../../store/data/videos-context"
-// prettier-ignore
-import { CustomBreadcrumbs, Description, Player, RecommendedVideos, VideoDetails } from "./components"
+import { getInfo, getRecommendedVideos } from "../../lib/api"
+import { Description, Player, VideoDetails } from "./components"
 
 const Details = () => {
-  console.log("Details")
   const { videoId } = useParams()
-  const { videos, fetchAllVideos } = useVideos()
-  const { sendRequest, status, data, error } = useHttp(true)
-  const [recommended, setRecommended] = useState([])
+  const {
+    sendRequest: detailsRequest,
+    status: detailsStatus,
+    data: detailsData,
+  } = useHttp(true)
+  const {
+    sendRequest: recommendedRequest,
+    status: recommendedStatus,
+    data: recommendedData,
+  } = useHttp(true)
 
   useEffect(() => {
-    console.log("Fetch useEffect")
-    fetchAllVideos()
-  }, [fetchAllVideos])
-
-  useEffect(() => {
-    console.log("sendRequest useEffect")
-    sendRequest(getInfo, { document: "videos", id: videoId })
-  }, [sendRequest, videoId])
-
-  useEffect(() => {
-    console.log("RecommendedVideos useEffect")
-    if (data && status === "completed") {
-      setRecommended(
-        videos.filter((v) => v.category === data.category && v.id !== videoId)
-      )
+    console.log("recommendedRequest")
+    if (detailsData) {
+      console.log(detailsData)
+      recommendedRequest(getRecommendedVideos, {
+        category: detailsData?.category,
+        videoId,
+      })
     }
-  }, [status, data, videoId, videos])
+  }, [recommendedRequest, detailsData, detailsData?.category, videoId])
 
-  if (videos.length === 0) return <Spinner />
-  if (status === "pending" && !error && !data) return <Spinner />
+  useEffect(() => {
+    detailsRequest(getInfo, { document: "videos", id: videoId })
+  }, [detailsRequest, videoId])
+
+  if (detailsStatus === "pending" || recommendedStatus === "pending")
+    return <Spinner />
+  console.log(recommendedData)
+  console.log("Details")
+
   return (
     <Container>
-      <CustomBreadcrumbs title={data?.title} />
+      <CustomBreadcrumbs title={detailsData?.title} />
       <Grid container columns={13} gap="0.5rem">
         {/* Player */}
-        <Player url={data?.videoUrl} />
+        <Player url={detailsData?.videoUrl} />
         {/* video details (user who upload the video , publish date, download button) */}
         <VideoDetails
-          userId={data?.userId}
-          id={data?.id}
-          url={data?.videoUrl}
+          userId={detailsData?.userId}
+          id={detailsData?.id}
+          url={detailsData?.videoUrl}
         />
       </Grid>
       {/* Description */}
-      {data?.description && <Description desc={data?.description} />}
-      {recommended.length > 0 && <RecommendedVideos videos={recommended} />}
+      {detailsData?.description && (
+        <Description desc={detailsData?.description} />
+      )}
+      {recommendedData.length > 0 && (
+        <VideosGrid title="Recommended Videos" videos={recommendedData} />
+      )}
     </Container>
   )
 }

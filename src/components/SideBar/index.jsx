@@ -2,31 +2,14 @@ import styled from "@emotion/styled"
 import { Stack } from "@mui/material"
 import Tooltip from "@mui/material/Tooltip"
 import React from "react"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { categories } from "./data"
 import Zoom from "@mui/material/Zoom"
 
-const CustomLink = styled(Link)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  color: theme.palette.text.primary,
-}))
-
 const SideBar = () => {
   return (
-    <Stack
-      component={"ul"}
-      sx={{
-        flexDirection: "column",
-        justifyContent: "start",
-        alignItems: "center",
-        padding: 0,
-        width: "4rem",
-        // position: "fixed",
-        // top: 102,
-      }}
-    >
+    <Container component={"ul"}>
       {categories.map((category) => (
-        // <div>Category</div>
         <Stack component={"li"} key={category.id} my={2}>
           <CustomLink to={`/category/${category.name}`}>
             <Tooltip
@@ -41,8 +24,26 @@ const SideBar = () => {
           </CustomLink>
         </Stack>
       ))}
-    </Stack>
+    </Container>
   )
 }
 
 export default SideBar
+
+const Container = styled(Stack)({
+  flexDirection: "column",
+  justifyContent: "start",
+  alignItems: "center",
+  padding: 0,
+  width: "4rem",
+  // position: "fixed",
+  // top: 102,
+})
+
+const CustomLink = styled(NavLink)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
+  "&.active": {
+    color: "#0CC1F2",
+  },
+}))

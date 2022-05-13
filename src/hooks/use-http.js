@@ -35,16 +35,19 @@ const useHttp = (startWithPending = false) => {
     error: null,
   })
 
-  const sendRequest = useCallback(async (requestFunction, requestData) => {
-    dispatch({ type: "SEND" })
-    try {
-      const responseData = await requestFunction(requestData)
-      dispatch({ type: "SUCCESS", responseData })
-    } catch (error) {
-      const errorMessage = error.message || "Something went wrong!"
-      dispatch({ type: "ERROR", errorMessage })
-    }
-  }, [])
+  const sendRequest = useCallback(
+    async (requestFunction, requestData) => {
+      if (isNaN(startWithPending)) dispatch({ type: "SEND" })
+      try {
+        const responseData = await requestFunction(requestData)
+        dispatch({ type: "SUCCESS", responseData })
+      } catch (error) {
+        const errorMessage = error.message || "Something went wrong!"
+        dispatch({ type: "ERROR", errorMessage })
+      }
+    },
+    [startWithPending]
+  )
 
   return { sendRequest, ...httpState }
 }
