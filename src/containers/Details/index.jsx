@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack"
 import { styled } from "@mui/material/styles"
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { CustomBreadcrumbs, Spinner } from "../../components/UI"
+import { CustomBreadcrumbs, Spinner, NotFound } from "../../components/UI"
 import VideosGrid from "../../components/VideosGrid"
 import useHttp from "../../hooks/use-http"
 import { getInfo, getRecommendedVideos } from "../../lib/api"
@@ -23,14 +23,10 @@ const Details = () => {
   } = useHttp(true)
 
   useEffect(() => {
-    console.log("recommendedRequest")
-    if (detailsData) {
-      console.log(detailsData)
-      recommendedRequest(getRecommendedVideos, {
-        category: detailsData?.category,
-        videoId,
-      })
-    }
+    recommendedRequest(getRecommendedVideos, {
+      category: detailsData?.category,
+      videoId,
+    })
   }, [recommendedRequest, detailsData, detailsData?.category, videoId])
 
   useEffect(() => {
@@ -39,8 +35,7 @@ const Details = () => {
 
   if (detailsStatus === "pending" || recommendedStatus === "pending")
     return <Spinner />
-  console.log(recommendedData)
-  console.log("Details")
+  if (!detailsData) return <NotFound />
 
   return (
     <Container>
@@ -59,7 +54,7 @@ const Details = () => {
       {detailsData?.description && (
         <Description desc={detailsData?.description} />
       )}
-      {recommendedData.length > 0 && (
+      {recommendedData && (
         <VideosGrid title="Recommended Videos" videos={recommendedData} />
       )}
     </Container>

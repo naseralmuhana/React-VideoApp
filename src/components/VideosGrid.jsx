@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography"
 import VideoCard from "./VideoCard"
 
 const VideosGrid = ({ videos, title }) => {
+  if (videos.length === 0) return
   return (
     <Stack my="0.5rem" direction="column" alignSelf="baseline">
       {title && (

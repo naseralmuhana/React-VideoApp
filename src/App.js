@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 // prettier:ignore
 import { Create, Home, Login, Profile, Details } from "./containers"
 import { Layout, NotProtectedRoutes, ProtectedRoutes } from "./utilities"
@@ -11,7 +11,8 @@ const App = () => {
       </Route>
       <Route element={<ProtectedRoutes />}>
         <Route element={<Layout />}>
-          <Route path="/*" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<Navigate to="/" />} />
           <Route path="/category/:categoryId" element={<Home />} />
           <Route path="/create" element={<Create />} />
           <Route path="/users/:userId" element={<Profile />} />

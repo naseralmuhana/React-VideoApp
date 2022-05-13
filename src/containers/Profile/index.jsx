@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import useHttp from "../../hooks/use-http"
 import { useParams } from "react-router-dom"
 import { getUserVideos, getInfo } from "../../lib/api"
-import { Spinner, CustomBreadcrumbs } from "../../components/UI"
+import { Spinner, CustomBreadcrumbs, NotFound } from "../../components/UI"
 import Stack from "@mui/material/Stack"
 import styled from "@emotion/styled"
 import Cover from "./components/Cover"
@@ -31,8 +31,8 @@ const Profile = () => {
   }, [fetchUser, userId])
 
   if (videosStatus === "pending" || userStatus === "pending") return <Spinner />
+  if (!userData) return <NotFound />
 
-  console.log("PROFILE")
   return (
     <Container>
       <CustomBreadcrumbs title={userData?.displayName} />
