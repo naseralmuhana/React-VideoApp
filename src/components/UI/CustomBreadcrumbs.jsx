@@ -8,7 +8,7 @@ import { Typography } from "@mui/material"
 
 const CustomBreadcrumbs = ({ title }) => {
   return (
-    <Breadcrumbs getter aria-label="breadcrumb" sx={{ alignSelf: "baseline" }}>
+    <Breadcrumbs aria-label="breadcrumb" sx={{ alignSelf: "baseline" }}>
       <StyledBreadcrumb
         component={Link}
         to="/"

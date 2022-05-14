@@ -10,10 +10,7 @@ const SubmitButton = ({ loading }) => {
       loadingPosition="center"
       startIcon={<Save />}
       variant={`${loading ? "outlined" : "contained"}`}
-      sx={{
-        marginTop: "0.5rem",
-        width: "40%",
-      }}
+      sx={{ mt: "0.5rem", width: "40%" }}
     >
       Upload
     </LoadingButton>
