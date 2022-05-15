@@ -25,7 +25,7 @@ const Main = styled("main")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   color: theme.palette.text.primary,
   width: "100%",
-  minHeight: "calc(100vh - 103px)",
+  minHeight: "calc(100vh - 64px)",
   overflowX: "hidden",
   display: "flex",
 }))

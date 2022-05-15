@@ -1,39 +1,29 @@
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
 import styled from "@emotion/styled"
-import { AppBar, Stack } from "@mui/material"
-import React from "react"
+import Toolbar from "@mui/material/Toolbar"
 import { Logo } from "../UI"
-import { AddButton, AvatarMenu, Search, ThemeButton } from "./components"
+import { NavMenu, Search } from "./components"
 
-const NavBar = () => {
+export default function PrimarySearchAppBar() {
   return (
-    <CustomAppBar>
-      <Logo />
-      {/* <Search /> */}
-      <AppBarItemsContainer>
-        <ThemeButton />
-        <AddButton />
-        <AvatarMenu />
-      </AppBarItemsContainer>
-    </CustomAppBar>
+    <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 100 }}>
+      <CustomAppBar>
+        <Toolbar>
+          {/* Logo */}
+          <Logo />
+          <Box sx={{ flexGrow: 1, mx: { xs: "0.2rem", sm: "0.4rem" } }} />
+          {/* Search */}
+          <Search />
+          {/* Menu */}
+          <NavMenu />
+        </Toolbar>
+      </CustomAppBar>
+    </Box>
   )
 }
 
-export default NavBar
-
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: "1.5rem",
-  padding: "1rem",
-  width: "auto",
   backgroundColor: theme.palette.background.default,
-  position: "sticky",
+  position: "inherit",
 }))
-
-const AppBarItemsContainer = styled(Stack)({
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "20px",
-})

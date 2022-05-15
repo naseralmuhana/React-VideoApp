@@ -1,27 +1,35 @@
-import { IconButton } from "@mui/material"
-import { IoMoon, IoSunny } from "react-icons/io5"
+import LightModeOutlined from "@mui/icons-material/LightModeOutlined"
+import DarkMode from "@mui/icons-material/DarkMode"
+import IconButton from "@mui/material/IconButton"
 import { useColorMode } from "../../../store/theme/colorMode-context"
 
-const ThemeButton = () => {
+const ThemeButton = ({ withText = false }) => {
   const { mode, toggleColorMode } = useColorMode()
 
+  if (withText)
+    return mode === "light" ? (
+      <>
+        <DarkMode sx={{ color: "#121212", ...iconSx }} />
+        <p>Dark</p>
+      </>
+    ) : (
+      <>
+        <LightModeOutlined sx={{ color: "#d1d1d1", ...iconSx }} />
+        <p>Light</p>
+      </>
+    )
+
   return (
-    <IconButton
-      onClick={toggleColorMode}
-      sx={{
-        "&:hover": {
-          backgroundColor: "transparent",
-          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-        },
-      }}
-    >
+    <IconButton onClick={toggleColorMode}>
       {mode === "light" ? (
-        <IoMoon size="25" color="#121212" />
+        <DarkMode sx={{ color: "#121212" }} />
       ) : (
-        <IoSunny size="25" color="#d1d1d1" />
+        <LightModeOutlined sx={{ color: "#d1d1d1" }} />
       )}
     </IconButton>
   )
 }
 
 export default ThemeButton
+
+const iconSx = { fontSize: "1.7rem", my: "5px" }

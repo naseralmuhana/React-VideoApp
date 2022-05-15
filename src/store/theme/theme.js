@@ -3,6 +3,7 @@ export const themeObj = {
     text: { primary: "#d1d1d1" },
     otherColor: {
       borderColor: "#616161",
+      iconColor: "#121212",
     },
   },
   light: {
