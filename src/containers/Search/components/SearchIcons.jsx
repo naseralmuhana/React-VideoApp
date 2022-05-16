@@ -3,6 +3,22 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy"
 import ContentPasteIcon from "@mui/icons-material/ContentPaste"
 import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
+import Tooltip from "@mui/material/Tooltip"
+
+const TooltipIcon = ({ title, onClick, children }) => {
+  return (
+    <Tooltip title={title} placement="top">
+      <IconButton
+        type="button"
+        aria-label={title.toLowerCase()}
+        onClick={onClick}
+        sx={{ display: { xs: "none", sm: "flex" } }}
+      >
+        {children}
+      </IconButton>
+    </Tooltip>
+  )
+}
 
 // Clear
 export const ClearIconButton = ({ setSearch, searchFocus }) => {
@@ -11,9 +27,11 @@ export const ClearIconButton = ({ setSearch, searchFocus }) => {
     searchFocus()
   }
   return (
-    <IconButton type="button" aria-label="clear" onClick={handleClear}>
-      <CloseIcon sx={{ fontSize: { xs: "1.1rem", sm: "1.5rem" } }} />
-    </IconButton>
+    <Tooltip title="Clear" placement="top">
+      <IconButton type="button" aria-label="clear" onClick={handleClear}>
+        <CloseIcon sx={{ fontSize: { xs: "1.1rem", sm: "1.5rem" } }} />
+      </IconButton>
+    </Tooltip>
   )
 }
 // Copy
@@ -34,14 +52,9 @@ export const CopyIconButton = ({ search, requestAlert, searchFocus }) => {
         console.error("Failed to read clipboard contents: ", err)
       })
   return (
-    <IconButton
-      type="button"
-      aria-label="copy"
-      onClick={handleCopy}
-      sx={{ display: { xs: "none", sm: "flex" } }}
-    >
+    <TooltipIcon title="Copy" onClick={handleCopy}>
       <ContentCopyIcon />
-    </IconButton>
+    </TooltipIcon>
   )
 }
 
@@ -59,22 +72,19 @@ export const PasteIconButton = ({ setSearch, searchFocus }) => {
       })
 
   return (
-    <IconButton
-      type="button"
-      aria-label="paste"
-      onClick={handlePaste}
-      sx={{ display: { xs: "none", sm: "flex" } }}
-    >
+    <TooltipIcon title="Paste" onClick={handlePaste}>
       <ContentPasteIcon />
-    </IconButton>
+    </TooltipIcon>
   )
 }
 
 // SearchIcon
 export const SearchIconButton = () => {
   return (
-    <IconButton type="submit" aria-label="search">
-      <SearchIcon sx={{ fontSize: { xs: "1.1rem", sm: "1.5rem" } }} />
-    </IconButton>
+    <Tooltip title="Search" placement="top">
+      <IconButton type="submit" aria-label="search">
+        <SearchIcon sx={{ fontSize: { xs: "1.1rem", sm: "1.5rem" } }} />
+      </IconButton>
+    </Tooltip>
   )
 }
