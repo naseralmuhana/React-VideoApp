@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 // prettier:ignore
-import { Create, Home, Login, Profile, Details } from "./containers"
+import { Create, Home, Login, Profile, Details, Search } from "./containers"
 import { Layout, NotProtectedRoutes, ProtectedRoutes } from "./utilities"
 
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/category/:categoryId" element={<Home />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/create" element={<Create />} />
           <Route path="/users/:userId" element={<Profile />} />
           <Route path="/videos/:videoId" element={<Details />} />

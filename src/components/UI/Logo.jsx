@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import Box from "@mui/material/Box"
 import { Link } from "react-router-dom"
 import Logo_light from "../../assets/images/logo.png"
 import Logo_Dark from "../../assets/images/logo_dark.png"

@@ -25,11 +25,11 @@ const alertReducer = (state, action) => {
 const useAlert = () => {
   const [state, dispatch] = useReducer(alertReducer, initialState)
 
-  const requestAlert = (status, msg) => {
+  const requestAlert = (status, msg, time = 5000) => {
     dispatch({ type: "CREATE", alertData: { status, msg } })
     setTimeout(() => {
       dispatch({ type: "RESET" })
-    }, 5000)
+    }, time)
   }
 
   return { requestAlert, ...state }

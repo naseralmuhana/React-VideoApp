@@ -1,6 +1,9 @@
 import styled from "@emotion/styled"
-import { LinearProgress, Stack, Typography, Box } from "@mui/material"
-import React, { useEffect } from "react"
+import Box from "@mui/material/Box"
+import LinearProgress from "@mui/material/LinearProgress"
+import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
+import { useEffect } from "react"
 import { Circles } from "react-loader-spinner"
 
 const SpinnerStack = styled(Stack)({

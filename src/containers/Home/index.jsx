@@ -19,11 +19,12 @@ const Home = () => {
   }, [sendRequest, categoryId])
 
   if (status === "pending") return <Spinner />
-  if (data?.length === 0) return <NotFound />
+
   if (categoryId)
     return (
       <Container>
         <CustomBreadcrumbs title={categoryId} />
+        {data?.length === 0 && <NotFound />}
         {data.length > 0 && <VideosGrid videos={data} />}
       </Container>
     )
@@ -39,6 +40,6 @@ const Container = styled(Stack)({
   // justifyContent: "center",
   width: "100%",
   height: "100%",
-  padding: "1rem 1.5rem",
-  gap: "1rem",
+  // padding: "1rem 0.5rem",
+  // gap: "1rem",
 })

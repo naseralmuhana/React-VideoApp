@@ -4,11 +4,17 @@ import Breadcrumbs from "@mui/material/Breadcrumbs"
 import Chip from "@mui/material/Chip"
 import HomeIcon from "@mui/icons-material/Home"
 import { Link } from "react-router-dom"
-import { Typography } from "@mui/material"
+import Typography from "@mui/material/Typography"
 
 const CustomBreadcrumbs = ({ title }) => {
   return (
-    <Breadcrumbs aria-label="breadcrumb" sx={{ alignSelf: "baseline" }}>
+    <Breadcrumbs
+      aria-label="breadcrumb"
+      sx={{
+        alignSelf: "baseline",
+        p: { xs: "1rem 0.5rem  0", md: "1rem 0.75rem 0" },
+      }}
+    >
       <StyledBreadcrumb
         component={Link}
         to="/"

@@ -6,7 +6,7 @@ import VideoCard from "./VideoCard"
 const VideosGrid = ({ videos, title }) => {
   if (videos.length === 0) return
   return (
-    <Stack my="0.5rem" direction="column" alignSelf="baseline">
+    <Stack my="0.5rem" direction="column" alignSelf="baseline" width="100%">
       {title && (
         <Typography mb="1rem" variant="h5" component="h2">
           {title}

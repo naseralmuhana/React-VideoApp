@@ -1,41 +1,15 @@
-import React, { useState, useEffect } from "react"
-import Grid from "@mui/material/Grid"
-// prettier-ignore
-import {CardMedia, Card, CardContent, Typography, Avatar, CardActions} from "@mui/material"
 import styled from "@emotion/styled"
+import Avatar from "@mui/material/Avatar"
+import Card from "@mui/material/Card"
+import CardActions from "@mui/material/CardActions"
+import CardContent from "@mui/material/CardContent"
+import CardMedia from "@mui/material/CardMedia"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import moment from "moment"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { getInfo } from "../lib/api"
-import moment from "moment"
-
-const Item = styled(Grid)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  padding: theme.spacing(1.5),
-  [theme.breakpoints.down("md")]: {
-    padding: theme.spacing(1),
-  },
-  overflow: "hidden",
-  textAlign: "center",
-  position: "relative",
-  transition: "all 0.15s ease-in-out",
-  "&:hover": {
-    transform: "scale(1.1)",
-  },
-}))
-
-const CardLink = styled(Link)({
-  textDecoration: "none",
-})
-
-const CustomCardContent = styled(CardContent)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  cursor: "default",
-  paddingBottom: "0",
-})
 
 const VideoCard = ({ data }) => {
   const { videoUrl, title, userId, id } = data
@@ -62,19 +36,68 @@ const VideoCard = ({ data }) => {
           />
         </CardLink>
         <CustomCardContent>
-          <Typography component="h2">{title}</Typography>
+          <TitleTypography component="h2">{title}</TitleTypography>
           <Link to={`/users/${userId}`}>
             <Avatar src={user?.photoURL} />
           </Link>
         </CustomCardContent>
-        <CardActions sx={{ justifyContent: "flex-end", paddingRight: "16px" }}>
-          <Typography color="text.secondary" fontSize="12px">
+        <CustomCardActions>
+          <Typography
+            color="text.secondary"
+            sx={{ fontSize: { xs: "10px", sm: "12px" } }}
+          >
             {moment(new Date(parseInt(id)).toISOString()).calendar()}
           </Typography>
-        </CardActions>
+        </CustomCardActions>
       </Card>
     </Item>
   )
 }
 
 export default VideoCard
+
+const Item = styled(Grid)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  padding: theme.spacing(1.5),
+  [theme.breakpoints.down("md")]: {
+    padding: theme.spacing(1),
+  },
+  overflow: "hidden",
+  textAlign: "center",
+  position: "relative",
+  transition: "all 0.15s ease-in-out",
+  "&:hover": {
+    transform: "scale(1.1)",
+  },
+}))
+
+const CardLink = styled(Link)({
+  textDecoration: "none",
+})
+
+const CustomCardContent = styled(CardContent)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  cursor: "default",
+  paddingBottom: "0",
+  // flexWrap: "wrap",
+  [theme.breakpoints.between("0", "320")]: {
+    padding: "0.5rem 0.5rem 0",
+  },
+}))
+
+const TitleTypography = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.between("0", "320")]: {
+    fontSize: "0.8rem",
+    textAlign: "left",
+  },
+}))
+
+const CustomCardActions = styled(CardActions)({
+  justifyContent: "flex-end",
+  paddingRight: "16px",
+})

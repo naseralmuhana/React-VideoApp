@@ -1,28 +1,25 @@
 import styled from "@emotion/styled"
 import { Stack } from "@mui/material"
-import Tooltip from "@mui/material/Tooltip"
 import React from "react"
-import { NavLink } from "react-router-dom"
 import { categories } from "./data"
-import Zoom from "@mui/material/Zoom"
+import SideItem from "./components/SideItem"
+import { IoSearchOutline } from "react-icons/io5"
 
 const SideBar = () => {
   return (
     <Container component={"ul"}>
+      <SideItem
+        title="Search"
+        icon={<IoSearchOutline fontSize="25px" />}
+        to={`/search`}
+      />
       {categories.map((category) => (
-        <Stack component={"li"} key={category.id} my={2}>
-          <CustomLink to={`/category/${category.name}`}>
-            <Tooltip
-              title={category.name}
-              placement="right"
-              arrow
-              TransitionComponent={Zoom}
-              TransitionProps={{ timeout: 400 }}
-            >
-              <Stack component={"span"}>{category.iconSrc}</Stack>
-            </Tooltip>
-          </CustomLink>
-        </Stack>
+        <SideItem
+          key={category.id}
+          title={category.name}
+          icon={category.iconSrc}
+          to={`/category/${category.name}`}
+        />
       ))}
     </Container>
   )
@@ -30,20 +27,17 @@ const SideBar = () => {
 
 export default SideBar
 
-const Container = styled(Stack)({
+const Container = styled(Stack)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "start",
   alignItems: "center",
   padding: 0,
+  backgroundColor: theme.palette.background.paper,
   width: "4rem",
   // position: "fixed",
   // top: 102,
-})
 
-const CustomLink = styled(NavLink)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
-  color: theme.palette.text.primary,
-  "&.active": {
-    color: "#0CC1F2",
-  },
+  boxShadow: `0px 2px 4px -1px rgb(0 0 0 / 20%),
+     0px 4px 5px 0px rgb(0 0 0 / 14%),
+     0px 1px 10px 0px rgb(0 0 0 / 12%)`,
 }))

@@ -4,11 +4,17 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import notFoundSvg from "../../assets/images/notfound.svg"
 
-const NotFound = () => {
+const NotFound = ({ msg = "Not Found" }) => {
   return (
     <Container>
-      <Box component="img" src={notFoundSvg} width={600} />
-      <Typography fontSize={40}>Not Found</Typography>
+      <Box
+        component="img"
+        src={notFoundSvg}
+        sx={{ width: "70%", maxWidth: "600px", objectFit: "cover" }}
+      />
+      <Typography sx={{ fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" } }}>
+        {msg}
+      </Typography>
     </Container>
   )
 }
