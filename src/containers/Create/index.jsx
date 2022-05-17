@@ -1,5 +1,5 @@
-//prettier-ignore
-import { FormLabel, TextField } from "@mui/material"
+import FormLabel from "@mui/material/FormLabel"
+import TextField from "@mui/material/TextField"
 import { doc, setDoc } from "firebase/firestore"
 //prettier-ignore
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'

@@ -24,11 +24,11 @@ const Home = () => {
     return (
       <Container>
         <CustomBreadcrumbs title={categoryId} />
-        {data?.length === 0 && <NotFound />}
+        {data?.length === 0 && status === "completed" && <NotFound />}
         {data.length > 0 && <VideosGrid videos={data} />}
       </Container>
     )
-
+  if (data?.length === 0 && status === "completed") return <NotFound />
   return data.length > 0 && <VideosGrid videos={data} />
 }
 

@@ -45,7 +45,7 @@ const Search = () => {
       </Box>
     </Stack>
   )
-
+  if (data.length === 0 && status === "completed") return <NotFound />
   return (
     <Container>
       <SearchBar />
