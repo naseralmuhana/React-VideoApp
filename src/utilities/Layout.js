@@ -26,7 +26,7 @@ const Main = styled("main")(({ theme }) => ({
   color: theme.palette.text.primary,
   width: "100%",
   minHeight: "calc(100vh - 64px)",
-  [theme.breakpoints.up("xs")]: {
+  [theme.breakpoints.down("sm")]: {
     minHeight: "calc(100vh - 56px)",
   },
   overflowX: "hidden",

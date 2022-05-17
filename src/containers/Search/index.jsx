@@ -45,17 +45,24 @@ const Search = () => {
       </Box>
     </Stack>
   )
+
   return (
     <Container>
       <SearchBar />
-      {searchParams.has("q") && resultCounter}
-      {status === "pending" && <Spinner />}
-      {filteredData.length > 0 && <VideosGrid videos={filteredData} />}
-      {filteredData.length === 0 &&
-        !searchParams.has("q") &&
-        data?.length > 0 && <VideosGrid videos={data} />}
-      {filteredData.length === 0 && searchParams.has("q") && (
-        <NotFound msg="No Results Found" />
+      {status === "pending" ? (
+        <Spinner />
+      ) : (
+        <>
+          {searchParams.has("q") && resultCounter}
+
+          {filteredData.length > 0 && <VideosGrid videos={filteredData} />}
+          {filteredData.length === 0 &&
+            !searchParams.has("q") &&
+            data?.length > 0 && <VideosGrid videos={data} />}
+          {filteredData.length === 0 && searchParams.has("q") && (
+            <NotFound msg="No Results Found" />
+          )}
+        </>
       )}
     </Container>
   )
