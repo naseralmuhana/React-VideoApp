@@ -1,14 +1,14 @@
 import styled from "@emotion/styled"
+import Box from "@mui/material/Box"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
-import React, { useState, useEffect } from "react"
-import SearchBar from "./components/SearchBar"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import useHttp from "../../hooks/use-http"
 import { NotFound, Spinner } from "../../components/UI"
-import { getAllVideos } from "../../lib/api"
 import VideosGrid from "../../components/VideosGrid"
-import { Box } from "@mui/material"
+import useHttp from "../../hooks/use-http"
+import { getAllVideos } from "../../lib/api"
+import SearchBar from "./components/SearchBar"
 
 const filterData = (query, data) => {
   if (!query) {

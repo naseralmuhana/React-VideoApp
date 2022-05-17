@@ -1,12 +1,12 @@
-import { useEffect } from "react"
-import useHttp from "../../hooks/use-http"
-import { useParams } from "react-router-dom"
-import { getUserVideos, getInfo } from "../../lib/api"
-import { Spinner, CustomBreadcrumbs, NotFound } from "../../components/UI"
-import Stack from "@mui/material/Stack"
 import styled from "@emotion/styled"
-import Cover from "./components/Cover"
+import Stack from "@mui/material/Stack"
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
+import { CustomBreadcrumbs, NotFound, Spinner } from "../../components/UI"
 import VideosGrid from "../../components/VideosGrid"
+import useHttp from "../../hooks/use-http"
+import { getInfo, getUserVideos } from "../../lib/api"
+import Cover from "./components/Cover"
 
 const Profile = () => {
   const { userId } = useParams()
@@ -35,15 +35,10 @@ const Profile = () => {
 
   return (
     <Container>
-      <CustomBreadcrumbs title={userData?.displayName} />
+      <CustomBreadcrumbs title={userData?.displayName} pb="1rem" />
       <Body>
         <Cover src={userData?.photoURL} />
-        {videosData.length > 0 && (
-          <VideosGrid
-            title={`${userData?.displayName} Videos`}
-            videos={videosData}
-          />
-        )}
+        {videosData.length > 0 && <VideosGrid videos={videosData} />}
       </Body>
     </Container>
   )
@@ -54,11 +49,8 @@ export default Profile
 const Container = styled(Stack)({
   flexDirection: "column",
   alignItems: "center",
-  // justifyContent: "center",
   width: "100%",
   height: "100%",
-  padding: "1rem 1.5rem",
-  gap: "1rem",
 })
 
 const Body = styled(Stack)({

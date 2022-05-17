@@ -37,9 +37,6 @@ export default Home
 const Container = styled(Stack)({
   flexDirection: "column",
   alignItems: "center",
-  // justifyContent: "center",
   width: "100%",
   height: "100%",
-  // padding: "1rem 0.5rem",
-  // gap: "1rem",
 })

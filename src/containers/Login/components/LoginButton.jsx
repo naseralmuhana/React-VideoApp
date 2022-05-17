@@ -1,5 +1,4 @@
-import { Button } from "@mui/material"
-import React from "react"
+import Button from "@mui/material/Button"
 import { FcGoogle } from "react-icons/fc"
 import useNavAction from "../../../hooks/use-nav-action"
 import { useAuth } from "../../../store/auth/auth-context"

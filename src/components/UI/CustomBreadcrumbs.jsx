@@ -6,13 +6,13 @@ import HomeIcon from "@mui/icons-material/Home"
 import { Link } from "react-router-dom"
 import Typography from "@mui/material/Typography"
 
-const CustomBreadcrumbs = ({ title }) => {
+const CustomBreadcrumbs = ({ title, pb = 0 }) => {
   return (
     <Breadcrumbs
       aria-label="breadcrumb"
       sx={{
         alignSelf: "baseline",
-        p: { xs: "1rem 0.5rem  0", md: "1rem 0.75rem 0" },
+        p: { xs: `1rem 0.5rem ${pb}`, md: `1rem 0.75rem ${pb}` },
       }}
     >
       <StyledBreadcrumb
@@ -21,7 +21,7 @@ const CustomBreadcrumbs = ({ title }) => {
         label="Home"
         icon={<HomeIcon fontSize="small" />}
       />
-      <Typography color="text.primary">{title}</Typography>
+      <TitleTypography color="text.primary">{title}</TitleTypography>
     </Breadcrumbs>
   )
 }
@@ -48,4 +48,10 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
       backgroundColor: emphasize(backgroundColor, 0.12),
     },
   }
+})
+
+const TitleTypography = styled(Typography)({
+  "@media (max-width: 320px)": {
+    fontSize: "12px",
+  },
 })

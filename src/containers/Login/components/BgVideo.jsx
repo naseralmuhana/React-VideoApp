@@ -1,6 +1,4 @@
 import Box from "@mui/material/Box"
-import React from "react"
-
 
 const BgVideo = () => {
   return (

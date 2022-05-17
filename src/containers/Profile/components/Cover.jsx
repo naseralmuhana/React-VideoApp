@@ -8,7 +8,11 @@ const randomImage =
 
 const Cover = ({ src }) => {
   return (
-    <Container>
+    <Container
+      sx={{
+        p: { xs: `0 0.5rem`, md: `0 0.75rem` },
+      }}
+    >
       <RandomImage component="img" src={randomImage} alt="" />
       <UserAvatar src={src} />
     </Container>
@@ -26,9 +30,14 @@ const Container = styled(Stack)({
 })
 const RandomImage = styled(Box)({
   width: "100%",
-  height: "320px",
+  maxHeight: "320px",
+  minHeight: "100px",
   objectFit: "cover",
   borderRadius: "10px",
+  transition: "all 0.5s",
+  "@media (max-height: 420px)": {
+    height: "100px",
+  },
 })
 
 const UserAvatar = styled(Avatar)(({ theme }) => ({
