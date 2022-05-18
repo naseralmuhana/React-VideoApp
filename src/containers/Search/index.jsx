@@ -45,7 +45,7 @@ const Search = () => {
       </Box>
     </Stack>
   )
-  if (data.length === 0 && status === "completed") return <NotFound />
+  if (data?.length === 0 && status === "completed") return <NotFound />
   return (
     <Container>
       <SearchBar />
@@ -76,6 +76,7 @@ const Container = styled(Stack)({
   // justifyContent: "center",
   width: "100%",
   height: "100%",
+  overflow: "hidden",
 })
 
 const CustomSpan = styled(Typography)(({ theme }) => ({

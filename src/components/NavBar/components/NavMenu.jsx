@@ -91,7 +91,11 @@ const NavMenu = () => {
         <ThemeButton withText />
       </MobileMenuItem>
 
-      <MobileMenuItem>
+      <MobileMenuItem
+        onClick={handleProfileMenuClose}
+        component={Link}
+        to={`/create`}
+      >
         <AddBox sx={{ fontSize: "1.7rem", my: "5px" }} />
         <p>New</p>
       </MobileMenuItem>

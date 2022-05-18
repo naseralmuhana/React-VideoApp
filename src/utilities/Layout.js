@@ -31,6 +31,7 @@ const Main = styled("main")(({ theme }) => ({
   },
   overflowX: "hidden",
   display: "flex",
+  overflow: "hidden",
 }))
 
 const MainContent = styled(Stack)({
@@ -38,4 +39,5 @@ const MainContent = styled(Stack)({
   // justifyContent: "center",
   alignItems: "center",
   width: "100%",
+  overflow: "hidden",
 })

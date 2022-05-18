@@ -1,19 +1,21 @@
 import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
+import Tooltip from "@mui/material/Tooltip"
+import Box from "@mui/material/Box"
 import { doc, setDoc } from "firebase/firestore"
 //prettier-ignore
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { useRef, useState } from "react"
 import { IoTrash } from "react-icons/io5"
 import { useNavigate } from "react-router-dom"
-import { AlertMsg, Spinner } from "../../components/UI"
+import { AlertMsg, CustomBreadcrumbs, Spinner } from "../../components/UI"
 import { db, storage } from "../../firebase-config"
 import useAlert from "../../hooks/use-alert"
 import { useAuth } from "../../store/auth/auth-context"
 //prettier-ignore
-import { CategoryField, LocationField, RichTextEditor, SubmitButton, UploadPlaceHolder } from "./components"
+import { CategoryField, RichTextEditor, SubmitButton, UploadPlaceHolder } from "./components"
 //prettier-ignore
-import { CatLocContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
+import { TitCatContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
 
 const Create = () => {
   const { user } = useAuth()
@@ -25,7 +27,6 @@ const Create = () => {
     [progress, setProgress] = useState(1)
 
   const title = useRef(""),
-    location = useRef(""),
     editor = useRef(null)
 
   const submitHandler = async (e) => {
@@ -40,7 +41,6 @@ const Create = () => {
           title: title.current.value,
           userId: user?.uid,
           category: category,
-          location: location.current.value,
           videoUrl: videoAsset,
           description: editor.current.value,
         }
@@ -115,18 +115,25 @@ const Create = () => {
     />
   )
 
+  const deleteIcon = (
+    <Tooltip title="Delete">
+      <DeleteIconButton onClick={deleteVideoHandler}>
+        <IoTrash fontSize={20} />
+      </DeleteIconButton>
+    </Tooltip>
+  )
+
   return (
     <>
+      <CustomBreadcrumbs title={"Create a new Video"} />
       <Container onSubmit={submitHandler}>
         {alert && <AlertMsg status={status} msg={msg} />}
-        {/* TitleField */}
-        <TextField inputRef={title} label="Title" required fullWidth />
-        {/* categorySelect , locationField container */}
-        <CatLocContainer>
+        {/* TitleField && CategorySelector Container */}
+        <TitCatContainer>
+          <TextField inputRef={title} label="Title" required sx={{ flex: 3 }} />
           <CategoryField value={category} onChange={setCategory} />
-          <LocationField ref={location} />
-        </CatLocContainer>
-        {/* upload videoField container */}
+        </TitCatContainer>
+        {/* Upload videoField container */}
         <UploadContainer>
           {!videoAsset ? (
             <FormLabel sx={{ width: "100%", flex: 1 }}>
@@ -143,15 +150,15 @@ const Create = () => {
             </FormLabel>
           ) : (
             <VideoPlayerContainer>
-              <DeleteIconButton onClick={deleteVideoHandler}>
-                <IoTrash fontSize={20} />
-              </DeleteIconButton>
+              {deleteIcon}
               <VideoPlayer src={videoAsset} controls />
             </VideoPlayerContainer>
           )}
         </UploadContainer>
         {/* Text Editor */}
-        <RichTextEditor ref={editor} />
+        <Box sx={{ position: "relative", width: "100%", height: "auto" }}>
+          <RichTextEditor ref={editor} />
+        </Box>
         {/* Submit Button */}
         <SubmitButton loading={loading} />
       </Container>

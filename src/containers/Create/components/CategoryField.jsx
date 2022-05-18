@@ -7,7 +7,7 @@ import { categories } from "../../../components/SideBar/data"
 
 const CategoryField = ({ value, onChange }) => {
   return (
-    <FormControl sx={{ flex: 1 }}>
+    <FormControl sx={{ flex: { sm: 1.7, md: 1.2, lg: 1 } }}>
       <InputLabel id="label">Category</InputLabel>
       <Select
         labelId="label"
@@ -15,6 +15,12 @@ const CategoryField = ({ value, onChange }) => {
         label="Category"
         onChange={(e) => onChange(e.target.value)}
         required
+        sx={{
+          "& .MuiSelect-select": {
+            display: "flex",
+            height: "1.4375em !important",
+          },
+        }}
       >
         {categories.map((category) => (
           <MenuItem

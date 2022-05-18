@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material"
 import Stack from "@mui/material/Stack"
 
 export const Container = styled("form")(({ theme }) => ({
-  margin: "3rem",
+  margin: "2rem 0rem",
   border: "1px solid",
   borderRadius: "5px",
   padding: "1rem",
@@ -12,19 +12,28 @@ export const Container = styled("form")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   gap: "0.2rem",
-  width: "80%",
+  width: "95%",
   height: "100%",
   borderColor: theme.palette.otherColor.borderColor,
+  [theme.breakpoints.between("0", "340")]: {
+    padding: "0.5rem",
+    margin: "1rem 0.25rem",
+  },
 }))
 
-export const CatLocContainer = styled(Stack)({
+export const TitCatContainer = styled(Stack)(({ theme }) => ({
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
   width: "100%",
   gap: "0.5rem",
   margin: "0.5rem",
-})
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    alignItems: "stretch",
+    gap: "0.75rem",
+  },
+}))
 
 export const UploadContainer = styled(Stack)(({ theme }) => ({
   border: "1px dashed",
@@ -37,6 +46,10 @@ export const UploadContainer = styled(Stack)(({ theme }) => ({
   alignItems: "center",
   borderColor: theme.palette.otherColor.borderColor,
   marginBottom: "0.5rem",
+  transition: "all 0.5s",
+  [theme.breakpoints.down("sm")]: {
+    height: "250px",
+  },
 }))
 
 export const InnerUploadContainer = styled(Stack)(({ theme }) => ({
