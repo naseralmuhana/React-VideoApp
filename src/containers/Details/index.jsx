@@ -1,13 +1,13 @@
 import Grid from "@mui/material/Grid"
 import Stack from "@mui/material/Stack"
 import { styled } from "@mui/material/styles"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { CustomBreadcrumbs, Spinner, NotFound } from "../../components/UI"
 import VideosGrid from "../../components/VideosGrid"
 import useHttp from "../../hooks/use-http"
 import { getInfo, getRecommendedVideos } from "../../lib/api"
-import { Description, Player, VideoDetails } from "./components"
+import { Description, VideoPlayer, VideoDetails } from "./components"
 
 const Details = () => {
   const { videoId } = useParams()
@@ -40,9 +40,9 @@ const Details = () => {
   return (
     <Container>
       <CustomBreadcrumbs title={detailsData?.title} />
-      <Grid container columns={13} gap="0.5rem">
-        {/* Player */}
-        <Player url={detailsData?.videoUrl} />
+      <Grid container columns={12.15} gap="0.25rem">
+        {/* VideoPlayer */}
+        <VideoPlayer src={detailsData?.videoUrl} />
         {/* video details (user who upload the video , publish date, download button) */}
         <VideoDetails
           userId={detailsData?.userId}
@@ -66,9 +66,8 @@ export default Details
 const Container = styled(Stack)({
   flexDirection: "column",
   alignItems: "center",
-  // justifyContent: "center",
   width: "100%",
   height: "100%",
-  padding: "1rem 1.5rem",
+  padding: "0 1rem",
   gap: "1rem",
 })

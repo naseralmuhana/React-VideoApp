@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom"
 // prettier:ignore
 import { Create, Home, Login, Profile, Details, Search } from "./containers"
 import { Layout, NotProtectedRoutes, ProtectedRoutes } from "./utilities"
+import "video-react/dist/video-react.css" // import css for video Player
 
 const App = () => {
   return (
