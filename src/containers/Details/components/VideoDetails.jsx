@@ -1,8 +1,8 @@
 import DeleteIcon from "@mui/icons-material/Delete"
+import Tooltip from "@mui/material/Tooltip"
 import Avatar from "@mui/material/Avatar"
 import Grid from "@mui/material/Grid"
 import IconButton from "@mui/material/IconButton"
-// import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import moment from "moment"
 import { useEffect, useState } from "react"
@@ -18,7 +18,7 @@ const VideoDetails = ({ userId, id, url }) => {
 
   const [open, setOpen] = useState(false)
 
-  const handleClickOpen = (event) => setOpen(event.currentTarget)
+  const handleClickOpen = () => setOpen(true)
   const confirmHandler = () => {
     deleteInfo({ id })
     navigate("/", { replace: true })
@@ -71,12 +71,14 @@ const VideoDetails = ({ userId, id, url }) => {
       </Grid>
       {/* Buttons [Delete & download]  */}
       {user.uid === userId && (
-        <Grid item container alignItems="center">
+        <Grid item container alignItems="center" justifyContent="space-evenly">
           {/* Delete IconButton with a popup dialog  */}
           <Grid item>
-            <IconButton aria-label="delete" onClick={handleClickOpen}>
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title="Delete">
+              <IconButton aria-label="delete" onClick={handleClickOpen}>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
             {/* Delete Dialog */}
             <ConfirmDialog
               open={open}
@@ -91,9 +93,3 @@ const VideoDetails = ({ userId, id, url }) => {
 }
 
 export default VideoDetails
-
-/* <Grid item>
-          <a href={url} download onClick={(e) => e.stopPropagation()}>
-            <Button variant="contained">Free Download</Button>
-          </a>
-        </Grid> */

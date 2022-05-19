@@ -17,7 +17,7 @@ import { CategoryField, RichTextEditor, SubmitButton, UploadPlaceHolder } from "
 //prettier-ignore
 import { TitCatContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
 
-const Create = () => {
+const Create = ({ id }) => {
   const { user } = useAuth()
   const navigate = useNavigate()
   const { requestAlert, alert, status, msg } = useAlert()
