@@ -1,15 +1,16 @@
-import { Typography } from "@mui/material"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Slider from "@mui/material/Slider"
 import Stack from "@mui/material/Stack"
-import { styled } from "@mui/material/styles"
-import React, { useRef, useState } from "react"
+import styled from "@emotion/styled"
+import { useRef, useState } from "react"
 import { IoPause, IoPlay } from "react-icons/io5"
 // prettier-ignore
 import { MdForward10, MdFullscreen, MdOutlineReplay10, MdVolumeOff, MdVolumeUp } from "react-icons/md"
 import ReactPlayer from "react-player"
 import screenfull from "screenfull"
-import { Logo, ResIcon } from "../../../components/UI"
+import { Logo } from "../../../components/UI"
 import { format } from "../../../utilities"
 
 const Player = ({ url }) => {
@@ -108,26 +109,26 @@ const Player = ({ url }) => {
           <OtherControlsContainer container>
             {/* + 10 icon   */}
             <Grid item onClick={seekBackwardHandler}>
-              <ResIcon icon={MdOutlineReplay10} />
+              <IconBox component={MdOutlineReplay10} />
             </Grid>
             {/* play && pause icons */}
             <Grid item onClick={toggleVideoHandler}>
               {!isPlaying ? (
-                <ResIcon icon={IoPlay} />
+                <IconBox component={IoPlay} />
               ) : (
-                <ResIcon icon={IoPause} />
+                <IconBox component={IoPause} />
               )}
             </Grid>
             {/* - 10 icon   */}
             <Grid item onClick={seekForwardHandler}>
-              <ResIcon icon={MdForward10} />
+              <IconBox component={MdForward10} />
             </Grid>
             {/* Audio icon (toggle) */}
             <Grid item onClick={toggleAudioHandler}>
               {!isMuted ? (
-                <ResIcon icon={MdVolumeUp} />
+                <IconBox component={MdVolumeUp} />
               ) : (
-                <ResIcon icon={MdVolumeOff} />
+                <IconBox component={MdVolumeOff} />
               )}
             </Grid>
             {/* Slider */}
@@ -145,11 +146,11 @@ const Player = ({ url }) => {
             </Grid>
             {/* Logo */}
             <LogoGrid item>
-              <Logo width="70px" />
+              <Logo xsw="40px" smw="70px" mdw="100px" />
             </LogoGrid>
             {/* FullScreen icon */}
             <FullScreenGrid item onClick={fullScreenHandler}>
-              <ResIcon icon={MdFullscreen} />
+              <IconBox component={MdFullscreen} />
             </FullScreenGrid>
           </OtherControlsContainer>
         </BottomControlsContainer>
@@ -226,7 +227,20 @@ const OtherControlsContainer = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     gap: "0.7rem",
   },
-  margin: "0.5rem 0",
+  margin: "0.25rem 0",
+}))
+
+// IconBox(Style the other controls icons)
+const IconBox = styled(Box)(({ theme }) => ({
+  fontSize: "2rem",
+  [theme.breakpoints.down("md")]: {
+    fontSize: "1.75rem",
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "1.5rem",
+  },
+  color: "#d1d1d1",
+  cursor: "pointer",
 }))
 
 // Audio Slider
@@ -257,10 +271,13 @@ const DurationTypography = styled(Typography)(({ theme }) => ({
 // logo container
 const LogoGrid = styled(Grid)(({ theme }) => ({
   marginLeft: "auto",
-  [theme.breakpoints.down("md")]: { display: "none" },
+  [theme.breakpoints.between("0", "620")]: { display: "none" },
 }))
 
 // fullScreen container
 const FullScreenGrid = styled(Grid)(({ theme }) => ({
-  [theme.breakpoints.down("md")]: { marginLeft: "auto" },
+  // [theme.breakpoints.down("md")]: { marginLeft: "auto" },
+  [theme.breakpoints.between("0", "620")]: {
+    marginLeft: "auto",
+  },
 }))

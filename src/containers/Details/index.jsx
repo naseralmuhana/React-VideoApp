@@ -72,8 +72,3 @@ const Container = styled(Stack)({
   padding: "1rem 1.5rem",
   gap: "1rem",
 })
-
-// TODO: if user enter incorrect url => should display no such video there with button to goto the home page (under some code to use)
-
-// const navigate = useNavigate()
-// if (status === "completed" && !error && !data)
