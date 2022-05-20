@@ -1,8 +1,9 @@
 import styled from "@emotion/styled"
 import { IconButton } from "@mui/material"
 import Stack from "@mui/material/Stack"
+import { motion } from "framer-motion"
 
-export const Container = styled("form")(({ theme }) => ({
+export const Container = styled(motion.form)(({ theme }) => ({
   margin: "2rem 0rem",
   border: "1px solid",
   borderRadius: "5px",

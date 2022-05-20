@@ -9,3 +9,18 @@ export const format = (seconds) => {
 
   return `${mm}:${ss}`
 }
+
+export const variants = {
+  initial: {
+    x: "100vw",
+  },
+  animate: {
+    x: "0vw",
+    transition: { delay: 0.3, type: "spring", stiffness: 120 },
+  },
+
+  exit: {
+    x: "-100vw",
+    transition: { ease: "easeInOut" },
+  },
+}

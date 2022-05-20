@@ -17,6 +17,8 @@ import { CategoryField, RichTextEditor, SubmitButton, UploadPlaceHolder } from "
 //prettier-ignore
 import { TitCatContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
 
+import { variants } from "../../utilities"
+
 const Create = ({ id }) => {
   const { user } = useAuth()
   const navigate = useNavigate()
@@ -126,7 +128,13 @@ const Create = ({ id }) => {
   return (
     <>
       <CustomBreadcrumbs title={"Create a new Video"} />
-      <Container onSubmit={submitHandler}>
+      <Container
+        onSubmit={submitHandler}
+        variants={variants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
         {alert && <AlertMsg status={status} msg={msg} />}
         {/* TitleField && CategorySelector Container */}
         <TitCatContainer>

@@ -4,9 +4,18 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import notFoundSvg from "../../assets/images/notfound.svg"
 
+import { motion } from "framer-motion"
+import { variants } from "../../utilities"
+
 const NotFound = ({ msg = "Not Found" }) => {
   return (
-    <Container>
+    <Container
+      component={motion.div}
+      variants={variants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <Box
         component="img"
         src={notFoundSvg}

@@ -4,10 +4,26 @@ import styled from "@emotion/styled"
 import Toolbar from "@mui/material/Toolbar"
 import { Logo } from "../UI"
 import { NavMenu } from "./components"
+import { motion } from "framer-motion"
+
+const containerVariants = {
+  initial: { opacity: 0, y: "-20vh" },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.25, type: "spring", stiffness: 120 },
+  },
+}
 
 const NavBar = () => {
   return (
-    <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 100 }}>
+    <Box
+      component={motion.div}
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 100 }}
+    >
       <CustomAppBar>
         <Toolbar>
           {/* Logo */}

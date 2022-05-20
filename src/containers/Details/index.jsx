@@ -8,6 +8,8 @@ import VideosGrid from "../../components/VideosGrid"
 import useHttp from "../../hooks/use-http"
 import { getInfo, getRecommendedVideos } from "../../lib/api"
 import { Description, VideoPlayer, VideoDetails } from "./components"
+import { motion } from "framer-motion"
+import { variants } from "../../utilities"
 
 const Details = () => {
   const { videoId } = useParams()
@@ -38,7 +40,13 @@ const Details = () => {
   if (!detailsData) return <NotFound />
 
   return (
-    <Container>
+    <Container
+      component={motion.div}
+      variants={variants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <CustomBreadcrumbs title={detailsData?.title} />
       <Grid container columns={12.15} gap="0.25rem">
         {/* VideoPlayer */}

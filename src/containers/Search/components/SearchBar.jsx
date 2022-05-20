@@ -7,6 +7,7 @@ import { useRef, useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { AlertMsg } from "../../../components/UI"
 import useAlert from "../../../hooks/use-alert"
+import { motion } from "framer-motion"
 // prettier-ignore
 import { ClearIconButton, CopyIconButton, PasteIconButton, SearchIconButton } from "./SearchIcons"
 
@@ -25,6 +26,7 @@ const SearchBar = () => {
     if (search) {
       setSearchParams({ q: search })
     } else {
+      console.log("asd")
       setSearchParams({})
       requestAlert("error", `Enter any thing`, 10000)
     }
@@ -37,7 +39,12 @@ const SearchBar = () => {
 
   return (
     <Box
-      component="form"
+      component={motion.form}
+      initial={{ y: "-30vh" }}
+      animate={{ y: "0vh" }}
+      exit={{ y: "-30vh" }}
+      transition={{ delay: 0.3, type: "spring", stiffness: 120 }}
+      // transition={{ duration: 0.5, type: "spring", stiffness: 120 }}
       onSubmit={handleForm}
       sx={{ width: "100%", p: { xs: "1rem 0.5rem  0", md: "1rem 0.75rem 0" } }}
     >

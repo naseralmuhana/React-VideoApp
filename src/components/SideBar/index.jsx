@@ -3,10 +3,25 @@ import Stack from "@mui/material/Stack"
 import { categories } from "./data"
 import SideItem from "./components/SideItem"
 import { IoSearchOutline } from "react-icons/io5"
+import { motion } from "framer-motion"
+
+const containerVariants = {
+  initial: { opacity: 0, x: "-10vw" },
+  animate: {
+    opacity: 1,
+    x: 0,
+    transition: { delay: 0.5, type: "spring", stiffness: 80 },
+  },
+}
 
 const SideBar = () => {
   return (
-    <Container component={"ul"}>
+    <Container
+      component={motion.ul}
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+    >
       <SideItem
         title="Search"
         icon={<IoSearchOutline fontSize="25px" />}

@@ -45,7 +45,6 @@ const Search = () => {
       </Box>
     </Stack>
   )
-  if (data?.length === 0 && status === "completed") return <NotFound />
   return (
     <Container>
       <SearchBar />
@@ -53,15 +52,16 @@ const Search = () => {
         <Spinner />
       ) : (
         <>
-          {searchParams.has("q") && resultCounter}
-
-          {filteredData.length > 0 && <VideosGrid videos={filteredData} />}
+          {data?.length === 0 && status === "completed" && <NotFound />}
           {filteredData.length === 0 &&
             !searchParams.has("q") &&
             data?.length > 0 && <VideosGrid videos={data} />}
+          {searchParams.has("q") && resultCounter}
           {filteredData.length === 0 && searchParams.has("q") && (
             <NotFound msg="No Results Found" />
           )}
+
+          {filteredData.length > 0 && <VideosGrid videos={filteredData} />}
         </>
       )}
     </Container>
@@ -73,7 +73,7 @@ export default Search
 const Container = styled(Stack)({
   flexDirection: "column",
   alignItems: "center",
-  // justifyContent: "center",
+
   width: "100%",
   height: "100%",
   overflow: "hidden",

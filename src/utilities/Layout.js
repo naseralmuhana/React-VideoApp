@@ -1,12 +1,14 @@
-import { Stack, styled } from "@mui/material"
+import Stack from "@mui/material/Stack"
+import Box from "@mui/material/Box"
 import React from "react"
 import { Outlet } from "react-router-dom"
 import NavBar from "../components/NavBar"
 import SideBar from "../components/SideBar"
+import styled from "@emotion/styled"
 
 const Layout = () => {
   return (
-    <>
+    <App>
       <NavBar />
 
       <Main>
@@ -15,7 +17,7 @@ const Layout = () => {
           <Outlet />
         </MainContent>
       </Main>
-    </>
+    </App>
   )
 }
 
@@ -41,3 +43,8 @@ const MainContent = styled(Stack)({
   width: "100%",
   overflow: "hidden",
 })
+
+const App = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
+}))
