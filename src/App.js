@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion"
 import React, { Suspense } from "react"
 import { Spinner } from "./components/UI"
 import { Box } from "@mui/material"
+import styled from "@emotion/styled"
 
 const Create = React.lazy(() => import("./containers/Create"))
 const Login = React.lazy(() => import("./containers/Login"))
@@ -21,9 +22,9 @@ const App = () => {
     <AnimatePresence>
       <Suspense
         fallback={
-          <Box height="100vh" width="100vw">
+          <SpinnerBox>
             <Spinner />
-          </Box>
+          </SpinnerBox>
         }
       >
         <Routes location={location} key={location.key}>
@@ -48,3 +49,9 @@ const App = () => {
 }
 
 export default App
+
+const SpinnerBox = styled(Box)(({ theme }) => ({
+  height: "100vh",
+  width: "100vw",
+  backgroundColor: theme.palette.background.default,
+}))
