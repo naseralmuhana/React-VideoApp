@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-
+    "build:deploy": "env-cmd -f .env npm run build && firebase deploy -P react-video-5e661"
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
