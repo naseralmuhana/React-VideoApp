@@ -9,6 +9,7 @@ import VideosGrid from "../../components/VideosGrid"
 import useHttp from "../../hooks/use-http"
 import { getAllVideos } from "../../lib/api"
 import SearchBar from "./components/SearchBar"
+import { Helmet } from "react-helmet"
 
 const filterData = (query, data) => {
   if (!query) {
@@ -52,6 +53,24 @@ const Search = () => {
         <Spinner />
       ) : (
         <>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>
+              {searchParams.has("q")
+                ? `Search | ${searchParams?.get("q")}`
+                : "Search"}
+            </title>
+            <link
+              rel="canonical"
+              href={`https://spiffy-bubblegum-7dabd3.netlify.app/search?q=${searchParams?.get(
+                "q"
+              )}`}
+            />
+            <meta
+              name="description"
+              content={`Results for ${searchParams.get("q")}`}
+            />
+          </Helmet>
           {data?.length === 0 && status === "completed" && <NotFound />}
           {filteredData.length === 0 &&
             !searchParams.has("q") &&

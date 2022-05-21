@@ -7,6 +7,7 @@ import VideosGrid from "../../components/VideosGrid"
 import useHttp from "../../hooks/use-http"
 import { getInfo, getUserVideos } from "../../lib/api"
 import Cover from "./components/Cover"
+import { Helmet } from "react-helmet"
 
 const Profile = () => {
   const { userId } = useParams()
@@ -34,13 +35,27 @@ const Profile = () => {
   if (!userData) return <NotFound />
 
   return (
-    <Container>
-      <CustomBreadcrumbs title={userData?.displayName} pb="1rem" />
-      <Body>
-        <Cover src={userData?.photoURL} />
-        {videosData.length > 0 && <VideosGrid videos={videosData} />}
-      </Body>
-    </Container>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>User | {userData?.displayName}</title>
+        <link
+          rel="canonical"
+          href={`https://spiffy-bubblegum-7dabd3.netlify.app/user/${userId}`}
+        />
+        <meta
+          name="description"
+          content={`${userData?.displayName} Profile & Videos`}
+        />
+      </Helmet>
+      <Container>
+        <CustomBreadcrumbs title={userData?.displayName} pb="1rem" />
+        <Body>
+          <Cover src={userData?.photoURL} />
+          {videosData.length > 0 && <VideosGrid videos={videosData} />}
+        </Body>
+      </Container>
+    </>
   )
 }
 

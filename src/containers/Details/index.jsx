@@ -10,6 +10,7 @@ import { getInfo, getRecommendedVideos } from "../../lib/api"
 import { Description, VideoPlayer, VideoDetails } from "./components"
 import { motion } from "framer-motion"
 import { variants } from "../../utilities"
+import { Helmet } from "react-helmet"
 
 const Details = () => {
   const { videoId } = useParams()
@@ -40,32 +41,43 @@ const Details = () => {
   if (!detailsData) return <NotFound />
 
   return (
-    <Container
-      component={motion.div}
-      variants={variants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-    >
-      <CustomBreadcrumbs title={detailsData?.title} />
-      <Grid container columns={12.15} gap="0.25rem">
-        {/* VideoPlayer */}
-        <VideoPlayer src={detailsData?.videoUrl} />
-        {/* video details (user who upload the video , publish date, download button) */}
-        <VideoDetails
-          userId={detailsData?.userId}
-          id={detailsData?.id}
-          url={detailsData?.videoUrl}
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{detailsData?.title}</title>
+        <link
+          rel="canonical"
+          href={`https://spiffy-bubblegum-7dabd3.netlify.app/videos/${videoId}`}
         />
-      </Grid>
-      {/* Description */}
-      {detailsData?.description && (
-        <Description desc={detailsData?.description} />
-      )}
-      {recommendedData && (
-        <VideosGrid title="Recommended Videos" videos={recommendedData} />
-      )}
-    </Container>
+        <meta name="description" content={detailsData?.description} />
+      </Helmet>
+      <Container
+        component={motion.div}
+        variants={variants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <CustomBreadcrumbs title={detailsData?.title} />
+        <Grid container columns={12.15} gap="0.25rem">
+          {/* VideoPlayer */}
+          <VideoPlayer src={detailsData?.videoUrl} />
+          {/* video details (user who upload the video , publish date, download button) */}
+          <VideoDetails
+            userId={detailsData?.userId}
+            id={detailsData?.id}
+            url={detailsData?.videoUrl}
+          />
+        </Grid>
+        {/* Description */}
+        {detailsData?.description && (
+          <Description desc={detailsData?.description} />
+        )}
+        {recommendedData && (
+          <VideosGrid title="Recommended Videos" videos={recommendedData} />
+        )}
+      </Container>
+    </>
   )
 }
 

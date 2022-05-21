@@ -16,7 +16,7 @@ import { useAuth } from "../../store/auth/auth-context"
 import { CategoryField, RichTextEditor, SubmitButton, UploadPlaceHolder } from "./components"
 //prettier-ignore
 import { TitCatContainer, Container, DeleteIconButton, InnerUploadContainer, UploadContainer, VideoPlayer, VideoPlayerContainer } from "./helper"
-
+import { Helmet } from "react-helmet"
 import { variants } from "../../utilities"
 
 const Create = ({ id }) => {
@@ -127,6 +127,15 @@ const Create = ({ id }) => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Create Video</title>
+        <link
+          rel="canonical"
+          href={`https://spiffy-bubblegum-7dabd3.netlify.app/create`}
+        />
+        <meta name="description" content="Create New Video" />
+      </Helmet>
       <CustomBreadcrumbs title={"Create a new Video"} />
       <Container
         onSubmit={submitHandler}

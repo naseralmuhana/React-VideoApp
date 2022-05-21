@@ -42,6 +42,7 @@ const App = () => {
               <Route path="/videos/:videoId" element={<Details />} />
             </Route>
           </Route>
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
     </AnimatePresence>
